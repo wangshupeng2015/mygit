@@ -1,10 +1,5 @@
-source/bsp/xscuwdt_sinit.o: ../source/bsp/xscuwdt_sinit.c \
- /home/wangshupeng/workspace/fros/include/bsp/xscuwdt.h \
- /home/wangshupeng/workspace/fros/include/bsp/xstatus.h \
+source/bsp/xplatform_info.o: ../source/bsp/xplatform_info.c \
  /home/wangshupeng/workspace/fros/include/bsp/xil_types.h \
- /home/wangshupeng/workspace/fros/include/bsp/xil_assert.h \
- /home/wangshupeng/workspace/fros/include/bsp/xil_types.h \
- /home/wangshupeng/workspace/fros/include/bsp/xscuwdt_hw.h \
  /home/wangshupeng/workspace/fros/include/bsp/xil_io.h \
  /home/wangshupeng/workspace/fros/include/bsp/xil_printf.h \
  /home/wangshupeng/workspace/fros/include/bsp/xparameters.h \
@@ -12,19 +7,11 @@ source/bsp/xscuwdt_sinit.o: ../source/bsp/xscuwdt_sinit.c \
  /home/wangshupeng/workspace/fros/include/bsp/bspconfig.h \
  /home/wangshupeng/workspace/fros/include/bsp/xpseudo_asm.h \
  /home/wangshupeng/workspace/fros/include/bsp/xreg_cortexa9.h \
- /home/wangshupeng/workspace/fros/include/bsp/xpseudo_asm_gcc.h
-
-/home/wangshupeng/workspace/fros/include/bsp/xscuwdt.h:
-
-/home/wangshupeng/workspace/fros/include/bsp/xstatus.h:
+ /home/wangshupeng/workspace/fros/include/bsp/xpseudo_asm_gcc.h \
+ /home/wangshupeng/workspace/fros/include/bsp/xil_types.h \
+ /home/wangshupeng/workspace/fros/include/bsp/xplatform_info.h
 
 /home/wangshupeng/workspace/fros/include/bsp/xil_types.h:
-
-/home/wangshupeng/workspace/fros/include/bsp/xil_assert.h:
-
-/home/wangshupeng/workspace/fros/include/bsp/xil_types.h:
-
-/home/wangshupeng/workspace/fros/include/bsp/xscuwdt_hw.h:
 
 /home/wangshupeng/workspace/fros/include/bsp/xil_io.h:
 
@@ -41,3 +28,7 @@ source/bsp/xscuwdt_sinit.o: ../source/bsp/xscuwdt_sinit.c \
 /home/wangshupeng/workspace/fros/include/bsp/xreg_cortexa9.h:
 
 /home/wangshupeng/workspace/fros/include/bsp/xpseudo_asm_gcc.h:
+
+/home/wangshupeng/workspace/fros/include/bsp/xil_types.h:
+
+/home/wangshupeng/workspace/fros/include/bsp/xplatform_info.h:

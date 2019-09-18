@@ -83,6 +83,13 @@
 * @note		This function enables the watchdog mode.
 *
 ******************************************************************************/
+
+void XScuWdt_SetWdMode(XScuWdt *InstancePtr);
+void XScuWdt_SetTimerMode(XScuWdt *InstancePtr);
+void XScuWdt_LoadWdt(XScuWdt *InstancePtr, u32 Value);
+
+
+
 s32 XScuWdt_CfgInitialize(XScuWdt *InstancePtr,
 			 XScuWdt_Config *ConfigPtr, u32 EffectiveAddress)
 {
@@ -116,7 +123,7 @@ s32 XScuWdt_CfgInitialize(XScuWdt *InstancePtr,
 		/*
 		 * Put the watchdog timer in Watchdog mode.
 		 */
-		XScuWdt_SetWdMode(InstancePtr);
+		XScuWdt_SetWdMode(InstancePtr);   //设置watchdog mode时出错？？？？？？？？？？？？通过设置看门狗控制寄存器的WD模式位，将看门狗定时器置于看门狗模式
 
 		/*
 		 * Indicate the instance is ready to use, successfully initialized.
@@ -128,6 +135,22 @@ s32 XScuWdt_CfgInitialize(XScuWdt *InstancePtr,
 	return CfgStatus;
 }
 
+void XScuWdt_LoadWdt(XScuWdt *InstancePtr, u32 Value)
+{
+	XScuWdt_WriteReg((InstancePtr)->Config.BaseAddr,XSCUWDT_LOAD_OFFSET, (Value));
+}
+void XScuWdt_SetWdMode(XScuWdt *InstancePtr)
+{
+	//printf("")
+	XScuWdt_WriteReg((InstancePtr)->Config.BaseAddr,XSCUWDT_CONTROL_OFFSET,(XScuWdt_ReadReg((InstancePtr)->Config.BaseAddr, XSCUWDT_CONTROL_OFFSET) |	(XSCUWDT_CONTROL_WD_MODE_MASK)));
+
+}
+
+void XScuWdt_SetTimerMode(XScuWdt *InstancePtr)
+{
+	XScuWdt_WriteReg((InstancePtr)->Config.BaseAddr,XSCUWDT_DISABLE_OFFSET,	XSCUWDT_DISABLE_VALUE1);			
+	XScuWdt_WriteReg((InstancePtr)->Config.BaseAddr,XSCUWDT_DISABLE_OFFSET,	XSCUWDT_DISABLE_VALUE2);
+}
 /****************************************************************************/
 /**
 *

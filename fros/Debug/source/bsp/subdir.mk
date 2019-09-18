@@ -5,8 +5,10 @@
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
 ../source/bsp/vectors.c \
+../source/bsp/xgpiops.c \
 ../source/bsp/xil_assert.c \
 ../source/bsp/xil_exception.c \
+../source/bsp/xplatform_info.c \
 ../source/bsp/xscugic.c \
 ../source/bsp/xscugic_g.c \
 ../source/bsp/xscugic_sinit.c \
@@ -16,8 +18,10 @@ C_SRCS += \
 
 OBJS += \
 ./source/bsp/vectors.o \
+./source/bsp/xgpiops.o \
 ./source/bsp/xil_assert.o \
 ./source/bsp/xil_exception.o \
+./source/bsp/xplatform_info.o \
 ./source/bsp/xscugic.o \
 ./source/bsp/xscugic_g.o \
 ./source/bsp/xscugic_sinit.o \
@@ -27,8 +31,10 @@ OBJS += \
 
 C_DEPS += \
 ./source/bsp/vectors.d \
+./source/bsp/xgpiops.d \
 ./source/bsp/xil_assert.d \
 ./source/bsp/xil_exception.d \
+./source/bsp/xplatform_info.d \
 ./source/bsp/xscugic.d \
 ./source/bsp/xscugic_g.d \
 ./source/bsp/xscugic_sinit.d \
@@ -41,7 +47,7 @@ C_DEPS += \
 source/bsp/%.o: ../source/bsp/%.c
 	@echo 'Building file: $<'
 	@echo 'Invoking: GNU ARM Cross C Compiler'
-	arm-none-eabi-gcc -mcpu=cortex-a7 -march=armv7-a -marm -mlittle-endian -mfloat-abi=hard -mfpu=vfpv4 -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections  -g3 -I"/home/wangshupeng/workspace/fros-1--/include" -std=gnu11 -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@)" -c -o "$@" "$<"
+	arm-none-eabi-gcc -mcpu=cortex-a7 -march=armv7-a -marm -mlittle-endian -mfloat-abi=hard -mfpu=vfpv4 -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections  -g3 -I"/home/wangshupeng/workspace/fros/include" -std=gnu11 -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@)" -c -o "$@" "$<"
 	@echo 'Finished building: $<'
 	@echo ' '
 

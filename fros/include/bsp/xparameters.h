@@ -348,24 +348,41 @@
 
 /******************************************************************/
 
+// /* Definitions for driver SCUWDT */
+// #define XPAR_XSCUWDT_NUM_INSTANCES 1
+
+// /* Definitions for peripheral PS7_SCUWDT_0 */
+// #define XPAR_PS7_SCUWDT_0_DEVICE_ID 0
+// #define XPAR_PS7_SCUWDT_0_BASEADDR 0xF8F00620
+// #define XPAR_PS7_SCUWDT_0_HIGHADDR 0xF8F006FF
+
+
+/******************************************************************/
+
+// /* Canonical definitions for peripheral PS7_SCUWDT_0 */
+// #define XPAR_SCUWDT_0_DEVICE_ID XPAR_PS7_SCUWDT_0_DEVICE_ID
+// #define XPAR_SCUWDT_0_BASEADDR 0xF8F00620
+// #define XPAR_SCUWDT_0_HIGHADDR 0xF8F006FF
+
+
+/******************************************************************/
+
 /* Definitions for driver SCUWDT */
 #define XPAR_XSCUWDT_NUM_INSTANCES 1
 
 /* Definitions for peripheral PS7_SCUWDT_0 */
 #define XPAR_PS7_SCUWDT_0_DEVICE_ID 0
-#define XPAR_PS7_SCUWDT_0_BASEADDR 0xF8F00620
-#define XPAR_PS7_SCUWDT_0_HIGHADDR 0xF8F006FF
-
-
-/******************************************************************/
+#define XPAR_PS7_SCUWDT_0_BASEADDR 0x30280000
+#define XPAR_PS7_SCUWDT_0_HIGHADDR 0x3028FFFF
 
 /* Canonical definitions for peripheral PS7_SCUWDT_0 */
 #define XPAR_SCUWDT_0_DEVICE_ID XPAR_PS7_SCUWDT_0_DEVICE_ID
-#define XPAR_SCUWDT_0_BASEADDR 0xF8F00620
-#define XPAR_SCUWDT_0_HIGHADDR 0xF8F006FF
+#define XPAR_SCUWDT_0_BASEADDR 0x30280000
+#define XPAR_SCUWDT_0_HIGHADDR 0x3028FFFF
 
 
-/******************************************************************/
+
+
 
 /* Definitions for driver SDPS */
 #define XPAR_XSDPS_NUM_INSTANCES 1

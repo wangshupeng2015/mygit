@@ -714,6 +714,8 @@ extern "C" {
 
 #endif /* configGENERATE_RUN_TIME_STATS */
 
+
+
 #ifndef portCONFIGURE_TIMER_FOR_RUN_TIME_STATS
 	#define portCONFIGURE_TIMER_FOR_RUN_TIME_STATS()
 #endif

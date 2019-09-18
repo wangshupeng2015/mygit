@@ -1969,6 +1969,7 @@ void vTaskStartScheduler( void )
 BaseType_t xReturn;
 
 	/* Add the idle task at the lowest priority. */
+	//创建一个idle 任务，
 	#if( configSUPPORT_STATIC_ALLOCATION == 1 )
 	{
 		StaticTask_t *pxIdleTaskTCBBuffer = NULL;
@@ -2007,6 +2008,7 @@ BaseType_t xReturn;
 	}
 	#endif /* configSUPPORT_STATIC_ALLOCATION */
 
+	//如果系统使用 软件定时器；将通过xTimerCreateTimerTask()创建定时器服务任务"Tmr Svc"
 	#if ( configUSE_TIMERS == 1 )
 	{
 		if( xReturn == pdPASS )
@@ -2019,6 +2021,8 @@ BaseType_t xReturn;
 		}
 	}
 	#endif /* configUSE_TIMERS */
+
+
 
 	if( xReturn == pdPASS )
 	{
@@ -2036,9 +2040,10 @@ BaseType_t xReturn;
 		the created tasks contain a status word with interrupts switched on
 		so interrupts will automatically get re-enabled when the first task
 		starts to run. */
+		//关闭中断
 		portDISABLE_INTERRUPTS();
 
-		#if ( configUSE_NEWLIB_REENTRANT == 1 )
+		#if ( configUSE_NEWLIB_REENTRANT == 1 ) //FREE RTos中定义为0
 		{
 			/* Switch Newlib's _impure_ptr variable to point to the _reent
 			structure specific to the task that will run first. */
@@ -2046,9 +2051,9 @@ BaseType_t xReturn;
 		}
 		#endif /* configUSE_NEWLIB_REENTRANT */
 
-		xNextTaskUnblockTime = portMAX_DELAY;
-		xSchedulerRunning = pdTRUE;
-		xTickCount = ( TickType_t ) configINITIAL_TICK_COUNT;
+		xNextTaskUnblockTime = portMAX_DELAY; //设置下一任务调度需要的阻塞时间
+		xSchedulerRunning = pdTRUE; //设置调度器工作标志
+		xTickCount = ( TickType_t ) configINITIAL_TICK_COUNT;//设置初始化时钟节拍计数器
 
 		/* If configGENERATE_RUN_TIME_STATS is defined then the following
 		macro must be defined to configure the timer/counter used to generate

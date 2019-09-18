@@ -137,6 +137,11 @@
 
 #include "bsp/xstatus.h"
 #include "bsp/xscuwdt_hw.h"
+#include "bsp/xil_types.h"
+
+
+
+
 
 #ifdef __cplusplus
 extern "C" {
@@ -165,6 +170,11 @@ typedef struct {
 	u32 IsReady;		/**< Device is initialized and ready */
 	u32 IsStarted;		/**< Device watchdog timer is running */
 } XScuWdt;
+
+void XScuWdt_LoadWdt(XScuWdt *InstancePtr, u32 Value);
+void XScuWdt_SetWdMode(XScuWdt *InstancePtr);
+void XScuWdt_SetTimerMode(XScuWdt *InstancePtr);
+
 
 /***************** Macros (Inline Functions) Definitions *********************/
 /****************************************************************************/
@@ -246,9 +256,12 @@ typedef struct {
 *		void XScuWdt_LoadWdt(XScuWdt *InstancePtr, u32 Value)
 *
 ******************************************************************************/
-#define XScuWdt_LoadWdt(InstancePtr, Value)				\
-	XScuWdt_WriteReg((InstancePtr)->Config.BaseAddr,		\
-			XSCUWDT_LOAD_OFFSET, (Value))
+// #define XScuWdt_LoadWdt(InstancePtr, Value)				\
+// 	XScuWdt_WriteReg((InstancePtr)->Config.BaseAddr,		\
+// 			XSCUWDT_LOAD_OFFSET, (Value))
+
+
+
 
 /****************************************************************************/
 /**
@@ -264,13 +277,16 @@ typedef struct {
 *		void XScuWdt_SetWdMode(XScuWdt *InstancePtr)
 *
 ******************************************************************************/
-#define XScuWdt_SetWdMode(InstancePtr)					  \
-	XScuWdt_WriteReg((InstancePtr)->Config.BaseAddr,		  \
-			 XSCUWDT_CONTROL_OFFSET,			  \
-			 (XScuWdt_ReadReg((InstancePtr)->Config.BaseAddr, \
-			  XSCUWDT_CONTROL_OFFSET) |			  \
-			  (XSCUWDT_CONTROL_WD_MODE_MASK)))
+// #define XScuWdt_SetWdMode(InstancePtr)					  \
+// 	XScuWdt_WriteReg((InstancePtr)->Config.BaseAddr,		  \
+// 			 XSCUWDT_CONTROL_OFFSET,			  \
+// 			 (XScuWdt_ReadReg((InstancePtr)->Config.BaseAddr, \
+// 			  XSCUWDT_CONTROL_OFFSET) |			  \
+// 			  (XSCUWDT_CONTROL_WD_MODE_MASK)))
 
+void XScuWdt_LoadWdt(XScuWdt *InstancePtr, u32 Value);
+void XScuWdt_SetWdMode(XScuWdt *InstancePtr);
+void XScuWdt_SetTimerMode(XScuWdt *InstancePtr);
 /****************************************************************************/
 /**
 *
@@ -288,15 +304,22 @@ typedef struct {
 *		void XScuWdt_SetTimerMode(XScuWdt *InstancePtr)
 *
 ******************************************************************************/
-#define XScuWdt_SetTimerMode(InstancePtr)				\
-{									\
-	XScuWdt_WriteReg((InstancePtr)->Config.BaseAddr,		\
-			XSCUWDT_DISABLE_OFFSET,				\
-			XSCUWDT_DISABLE_VALUE1);			\
-	XScuWdt_WriteReg((InstancePtr)->Config.BaseAddr,		\
-			XSCUWDT_DISABLE_OFFSET,				\
-			XSCUWDT_DISABLE_VALUE2);			\
-}
+//#define XScuWdt_SetTimerMode(InstancePtr)				\
+//{									\
+//	XScuWdt_WriteReg((InstancePtr)->Config.BaseAddr,		\
+//			XSCUWDT_DISABLE_OFFSET,				\
+//			XSCUWDT_DISABLE_VALUE1);			\
+//	XScuWdt_WriteReg((InstancePtr)->Config.BaseAddr,		\
+//			XSCUWDT_DISABLE_OFFSET,				\
+//			XSCUWDT_DISABLE_VALUE2);			\
+//}
+
+
+//void XScuWdt_SetTimerMode(XScuWdt *InstancePtr)
+//{
+//	XScuWdt_WriteReg((InstancePtr)->Config.BaseAddr,XSCUWDT_DISABLE_OFFSET,	XSCUWDT_DISABLE_VALUE1);
+//	XScuWdt_WriteReg((InstancePtr)->Config.BaseAddr,XSCUWDT_DISABLE_OFFSET,	XSCUWDT_DISABLE_VALUE2);
+//}
 
 /****************************************************************************/
 /**

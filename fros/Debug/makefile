@@ -32,38 +32,38 @@ endif
 
 # Add inputs and outputs from these tool invocations to the build variables 
 SECONDARY_FLASH += \
-fros-1--.bin \
+fros.bin \
 
 SECONDARY_SIZE += \
-fros-1--.siz \
+fros.siz \
 
 
 # All Target
-all: fros-1--.elf secondary-outputs
+all: fros.elf secondary-outputs
 
 # Tool invocations
-fros-1--.elf: $(OBJS) $(USER_OBJS)
+fros.elf: $(OBJS) $(USER_OBJS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: GNU ARM Cross C Linker'
-	arm-none-eabi-gcc -mcpu=cortex-a7 -march=armv7-a -marm -mlittle-endian -mfloat-abi=hard -mfpu=vfpv4 -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections  -g3 -T "/home/wangshupeng/workspace/fros-1--/source/kernel/ld.lds" -Xlinker --gc-sections -Wl,-Map,"fros-1--.map" -o "fros-1--.elf" $(OBJS) $(USER_OBJS) $(LIBS)
+	arm-none-eabi-gcc -mcpu=cortex-a7 -march=armv7-a -marm -mlittle-endian -mfloat-abi=hard -mfpu=vfpv4 -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections  -g3 -T "/home/wangshupeng/workspace/fros/source/kernel/ld.lds" -Xlinker --gc-sections -Wl,-Map,"fros.map" -o "fros.elf" $(OBJS) $(USER_OBJS) $(LIBS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 
-fros-1--.bin: fros-1--.elf
+fros.bin: fros.elf
 	@echo 'Invoking: GNU ARM Cross Create Flash Image'
-	arm-none-eabi-objcopy -O binary "fros-1--.elf"  "fros-1--.bin"
+	arm-none-eabi-objcopy -O binary "fros.elf"  "fros.bin"
 	@echo 'Finished building: $@'
 	@echo ' '
 
-fros-1--.siz: fros-1--.elf
+fros.siz: fros.elf
 	@echo 'Invoking: GNU ARM Cross Print Size'
-	arm-none-eabi-size --format=berkeley "fros-1--.elf"
+	arm-none-eabi-size --format=berkeley "fros.elf"
 	@echo 'Finished building: $@'
 	@echo ' '
 
 # Other Targets
 clean:
-	-$(RM) $(OBJS)$(SECONDARY_FLASH)$(SECONDARY_SIZE)$(ASM_DEPS)$(S_UPPER_DEPS)$(C_DEPS) fros-1--.elf
+	-$(RM) $(OBJS)$(SECONDARY_FLASH)$(SECONDARY_SIZE)$(ASM_DEPS)$(S_UPPER_DEPS)$(C_DEPS) fros.elf
 	-@echo ' '
 
 secondary-outputs: $(SECONDARY_FLASH) $(SECONDARY_SIZE)

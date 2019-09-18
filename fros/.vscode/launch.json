@@ -10,7 +10,7 @@
         "name": "(gdb) Launch",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/Debug/fros-1.elf",
+            "program": "${workspaceFolder}/Debug/fros.elf",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
