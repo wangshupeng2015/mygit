@@ -40,6 +40,7 @@ task.h is included from an application file. */
 #include "kernel/timers.h"
 #include "kernel/stack_macros.h"
 #include "kernel/FreeRTOSConfig.h"
+#include "lib/print.h"
 /* Lint e9021, e961 and e750 are suppressed as a MISRA exception justified
 because the MPU ports require MPU_WRAPPERS_INCLUDED_FROM_API_FILE to be defined
 for the header files above, but not in this file, in order to generate the
@@ -2061,12 +2062,17 @@ BaseType_t xReturn;
 		is set to 0 and the following line fails to build then ensure you do not
 		have portCONFIGURE_TIMER_FOR_RUN_TIME_STATS() defined in your
 		FreeRTOSConfig.h file. */
-		portCONFIGURE_TIMER_FOR_RUN_TIME_STATS();
 
+		//configGENERATE_RUN_TIME_STATS has been set to 0
+		//portCONFIGURE_TIMER_FOR_RUN_TIME_STATS(); // /* 如果宏configGENERATE_RUN_TIME_STATS被定义,表示使用运行时间统计功能,则下面这个宏必须被定义,用于初始化一个基础定时器/计数器.*/
+		
+		printf("start----\r\n");
 		traceTASK_SWITCHED_IN();
+		printf("start----\r\n");
 
 		/* Setting up the timer tick is hardware specific and thus in the
 		portable interface. */
+		//	设置系统节拍定时器,这与硬件特性相关
 		if( xPortStartScheduler() != pdFALSE )
 		{
 			/* Should not reach here as if the scheduler is running the

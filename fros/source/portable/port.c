@@ -31,7 +31,7 @@
 /* Scheduler includes. */
 #include "kernel/FreeRTOS.h"
 #include "kernel/task.h"
-
+#include "lib/print.h"
 #ifndef configINTERRUPT_CONTROLLER_BASE_ADDRESS
 	#error configINTERRUPT_CONTROLLER_BASE_ADDRESS must be defined.  See http://www.freertos.org/Using-FreeRTOS-on-Cortex-A-Embedded-Processors.html
 #endif
@@ -348,36 +348,40 @@ static void prvTaskExitError( void )
 
 BaseType_t xPortStartScheduler( void )
 {
-uint32_t ulAPSR;
-
+	uint32_t ulAPSR;
+	printf("start scheduler\r\n");
 	#if( configASSERT_DEFINED == 1 )
 	{
 		volatile uint32_t ulOriginalPriority;
-		volatile uint8_t * const pucFirstUserPriorityRegister = ( volatile uint8_t * const ) ( configINTERRUPT_CONTROLLER_BASE_ADDRESS + portINTERRUPT_PRIORITY_REGISTER_OFFSET );
+		volatile uint8_t * const pucFirstUserPriorityRegister = ( volatile uint8_t * const ) ( XPAR_PS7_SCUGIC_0_DIST_BASEADDR+configINTERRUPT_CONTROLLER_DIST_INTERFACE_OFFSET+ portINTERRUPT_PRIORITY_REGISTER_OFFSET );
+		printf("set priority register\r\n");
+		printf("0x%x : %d\r\n",pucFirstUserPriorityRegister,*pucFirstUserPriorityRegister);
+
 		volatile uint8_t ucMaxPriorityValue;
 
 		/* Determine how many priority bits are implemented in the GIC.
 
 		Save the interrupt priority value that is about to be clobbered. */
+		printf("----\r\n");
 		ulOriginalPriority = *pucFirstUserPriorityRegister;
-
+		printf("----\r\n");
 		/* Determine the number of priority bits available.  First write to
 		all possible bits. */
 		*pucFirstUserPriorityRegister = portMAX_8_BIT_VALUE;
-
+		printf("change priority register1\r\n");
 		/* Read the value back to see how many bits stuck. */
 		ucMaxPriorityValue = *pucFirstUserPriorityRegister;
-
+		printf("change priority register2\r\n");
 		/* Shift to the least significant bits. */
 		while( ( ucMaxPriorityValue & portBIT_0_SET ) != portBIT_0_SET )
 		{
 			ucMaxPriorityValue >>= ( uint8_t ) 0x01;
 		}
-
+		printf("change priority register3\r\n");
 		/* Sanity check configUNIQUE_INTERRUPT_PRIORITIES matches the read
 		value. */
-		configASSERT( ucMaxPriorityValue == portLOWEST_INTERRUPT_PRIORITY );
-
+		//configASSERT( ucMaxPriorityValue == portLOWEST_INTERRUPT_PRIORITY );
+		printf("config assert\r\n");
 		/* Restore the clobbered interrupt priority register to its original
 		value. */
 		*pucFirstUserPriorityRegister = ulOriginalPriority;
@@ -387,17 +391,19 @@ uint32_t ulAPSR;
 
 	/* Only continue if the CPU is not in User mode.  The CPU must be in a
 	Privileged mode for the scheduler to start. */
+	printf("change mode start\r\n");
 	__asm volatile ( "MRS %0, APSR" : "=r" ( ulAPSR ) :: "memory" );
 	ulAPSR &= portAPSR_MODE_BITS_MASK;
+	printf("change mode over\r\n");
 	configASSERT( ulAPSR != portAPSR_USER_MODE );
-
+	printf("change mode over\r\n");
 	if( ulAPSR != portAPSR_USER_MODE )
 	{
 		/* Only continue if the binary point value is set to its lowest possible
 		setting.  See the comments in vPortValidateInterruptPriority() below for
 		more information. */
 		configASSERT( ( portICCBPR_BINARY_POINT_REGISTER & portBINARY_POINT_BITS ) <= portMAX_BINARY_POINT_VALUE );
-
+		printf("change mode over\r\n");
 		if( ( portICCBPR_BINARY_POINT_REGISTER & portBINARY_POINT_BITS ) <= portMAX_BINARY_POINT_VALUE )
 		{
 			/* Interrupts are turned off in the CPU itself to ensure tick does
@@ -405,10 +411,11 @@ uint32_t ulAPSR;
 			automatically turned back on in the CPU when the first task starts
 			executing. */
 			portCPU_IRQ_DISABLE();
-
+			printf("change mode over\r\n");
 			/* Start the timer that generates the tick ISR. */
-			//configSETUP_TICK_INTERRUPT();
-
+			
+			configSETUP_TICK_INTERRUPT(); //暂时关闭
+			printf("config tick_iterrupt over\r\n");
 			/* Start the first task executing. */
 			vPortRestoreTaskContext();
 		}

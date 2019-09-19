@@ -12,6 +12,8 @@ RM := rm -rf
 -include source/platform/subdir.mk
 -include source/lib/subdir.mk
 -include source/kernel/subdir.mk
+-include source/bsp/timer/subdir.mk
+-include source/bsp/gic/subdir.mk
 -include source/bsp/subdir.mk
 -include subdir.mk
 -include objects.mk

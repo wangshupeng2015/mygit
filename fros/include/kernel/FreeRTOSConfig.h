@@ -139,7 +139,7 @@ FreeRTOS/Source/tasks.c for limitations. */
 #include "bsp/xscuwdt.h"
 extern XScuWdt xWatchDogInstance;
 extern void vInitialiseTimerForRunTimeStats( void );
-#define configGENERATE_RUN_TIME_STATS 1
+//#define configGENERATE_RUN_TIME_STATS 1  //暂时关闭，调试后面的
 #define portCONFIGURE_TIMER_FOR_RUN_TIME_STATS() vInitialiseTimerForRunTimeStats()
 #define portGET_RUN_TIME_COUNTER_VALUE() ( ( 0xffffffffUL - XScuWdt_ReadReg( xWatchDogInstance.Config.BaseAddr, XSCUWDT_COUNTER_OFFSET ) ) >> 1 )
 

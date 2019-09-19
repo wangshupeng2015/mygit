@@ -76,12 +76,23 @@ extern "C" {
  * @{
  */
 
-#define XSCUWDT_LOAD_OFFSET	0x00U /**< Watchdog Load Register */
-#define XSCUWDT_COUNTER_OFFSET	0x04U /**< Watchdog Counter Register */
-#define XSCUWDT_CONTROL_OFFSET	0x08U /**< Watchdog Control Register */
-#define XSCUWDT_ISR_OFFSET	0x0CU /**< Watchdog Interrupt Status Register */
-#define XSCUWDT_RST_STS_OFFSET	0x10U /**< Watchdog Reset Status Register */
-#define XSCUWDT_DISABLE_OFFSET	0x14U /**< Watchdog Disable Register */
+// #define XSCUWDT_LOAD_OFFSET	0x00U /**< Watchdog Load Register */
+// #define XSCUWDT_COUNTER_OFFSET	0x04U /**< Watchdog Counter Register */
+// #define XSCUWDT_CONTROL_OFFSET	0x08U /**< Watchdog Control Register */
+// #define XSCUWDT_ISR_OFFSET	0x0CU /**< Watchdog Interrupt Status Register */
+// #define XSCUWDT_RST_STS_OFFSET	0x10U /**< Watchdog Reset Status Register */
+// #define XSCUWDT_DISABLE_OFFSET	0x14U /**< Watchdog Disable Register */
+
+
+#define XSCUWDT_CONTROL_OFFSET	0x0U /**< Watchdog Control Register */
+#define XSCUWDT_LOAD_OFFSET	0x02U /**< Watchdog Load Register   Executing the service sequence will reload the WDOG timeout counter.*/
+#define XSCUWDT_RST_STS_OFFSET	0x04U /**< Watchdog Reset Status Register */
+#define XSCUWDT_ISR_OFFSET	0x06U /**< Watchdog Interrupt Status Register */
+#define XSCUWDT_DISABLE_OFFSET	0x08U /**< Watchdog Disable Register */
+
+
+
+
 /* @} */
 
 /** @name Watchdog Control register

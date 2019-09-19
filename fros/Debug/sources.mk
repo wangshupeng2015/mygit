@@ -17,6 +17,8 @@ C_DEPS :=
 
 # Every subdirectory with source files must be described here
 SUBDIRS := \
+source/bsp/gic \
+source/bsp/timer \
 source/bsp \
 source/kernel \
 source/lib \

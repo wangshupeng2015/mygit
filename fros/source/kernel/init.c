@@ -12,7 +12,7 @@
 #include"kernel/queue.h"
 #include"kernel/list.h"
 #include<limits.h>
-#include"bsp/xscugic.h"
+#include"bsp/gic/xscugic.h"
 #include"portable/portmacro.h"
 //static const char *pcTextForTask1 = "Task 2 is running\r\n";
 //static const char *pcTextForTask2 = "Task 2 is running\r\n";
@@ -352,7 +352,7 @@ int main()
 	main_blinky();
 	
 	printString("wangshupeng\r\n");
-
+	
 	//xTaskCreate( vTaskFunction, "Task 1", 1000, pcTextForTask1, 1, NULL );
 //	xTaskCreate( vTaskFunction, "Task 2", 1000, pcTextForTask2, 2, NULL );
 	//printString("wangshupeng\r\n");

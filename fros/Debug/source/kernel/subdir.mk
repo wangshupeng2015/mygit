@@ -4,6 +4,7 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
+../source/kernel/FreeRTOS_tick_config.c \
 ../source/kernel/ParTest.c \
 ../source/kernel/croutine.c \
 ../source/kernel/heap_5.c \
@@ -19,6 +20,7 @@ S_UPPER_SRCS += \
 ../source/kernel/svc_entry.S 
 
 OBJS += \
+./source/kernel/FreeRTOS_tick_config.o \
 ./source/kernel/ParTest.o \
 ./source/kernel/croutine.o \
 ./source/kernel/head.o \
@@ -37,6 +39,7 @@ S_UPPER_DEPS += \
 ./source/kernel/svc_entry.d 
 
 C_DEPS += \
+./source/kernel/FreeRTOS_tick_config.d \
 ./source/kernel/ParTest.d \
 ./source/kernel/croutine.d \
 ./source/kernel/heap_5.d \
