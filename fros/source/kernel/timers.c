@@ -241,7 +241,7 @@ static void prvInitialiseNewTimer(	const char * const pcTimerName,			/*lint !e97
 
 BaseType_t xTimerCreateTimerTask( void )
 {
-BaseType_t xReturn = pdFAIL;
+	BaseType_t xReturn = pdFAIL;
 
 	/* This function is called when the scheduler is started if
 	configUSE_TIMERS is set to 1.  Check that the infrastructure used by the

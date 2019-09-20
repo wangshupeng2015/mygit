@@ -152,11 +152,49 @@ FreeRTOS_SWI_Handler:
 /******************************************************************************
  * vPortRestoreTaskContext is used to start the scheduler.
  *****************************************************************************/
-.type vPortRestoreTaskContext, %function
+.type vPortRestoreTaskContext, %function   //开始的地方
 vPortRestoreTaskContext:
-	/* Switch to system mode. */
-	CPS		#SYS_MODE
-	portRESTORE_CONTEXT
+	/* Switch to system mode. */    //RTOS保存数据以及回复数据都是在SYS模式下进行的
+	CPS		#SYS_MODE 
+	//portRESTORE_CONTEXT
+	//恢复第一个任务的上下文环境
+	LDR		R0, pxCurrentTCBConst
+	LDR		R1, [R0]
+	LDR		SP, [R1]
+
+	/* Is there a floating point context to restore?  If the restored
+	ulPortTaskHasFPUContext is zero then no. */
+	@ LDR		R0, ulPortTaskHasFPUContextConst
+	@ POP		{R1}
+	@ STR		R1, [R0]
+	@ CMP		R1, #0
+
+	@ /* Restore the floating point context, if any. */
+	@ POPNE 	{R0}
+	@ VPOPNE	{D16-D31} //??????卡住了
+	@ VPOPNE	{D0-D15}
+	@ VMSRNE  FPSCR, R0
+
+	/* Restore the critical section nesting depth. */
+	LDR		R0, ulCriticalNestingConst
+	POP		{R1}
+	STR		R1, [R0] //将R1寄存器的值存储到R0地址中
+
+	/* Ensure the priority mask is correct for the critical nesting depth. */
+	LDR		R2, ulICCPMRConst
+	LDR		R2, [R2]
+	CMP		R1, #0
+	MOVEQ	R4, #255
+	LDRNE	R4, ulMaxAPIPriorityMaskConst
+	LDRNE	R4, [R4]
+	STR		R4, [R2]
+
+	/* Restore all system mode registers other than the SP (which is already
+	being used). */
+	POP		{R0-R12, R14}
+
+	/* Return to the task code, loading CPSR on the way. */
+	RFEIA	sp! //执行完这条指定之后system mode下的sp重新指向了真正的栈顶,然后CPU回到任务lr指定的位置(初始值为任务对应的函数入口
 
 .align 4
 .type FreeRTOS_IRQ_Handler, %function

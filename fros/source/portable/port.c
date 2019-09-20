@@ -414,7 +414,7 @@ BaseType_t xPortStartScheduler( void )
 			printf("change mode over\r\n");
 			/* Start the timer that generates the tick ISR. */
 			
-			configSETUP_TICK_INTERRUPT(); //暂时关闭
+			//configSETUP_TICK_INTERRUPT(); //暂时关闭 ？？？？？？？？？
 			printf("config tick_iterrupt over\r\n");
 			/* Start the first task executing. */
 			vPortRestoreTaskContext();

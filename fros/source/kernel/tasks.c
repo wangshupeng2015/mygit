@@ -765,7 +765,7 @@ static void prvAddNewTaskToReadyList( TCB_t *pxNewTCB ) PRIVILEGED_FUNCTION;
 		}
 		#else /* portSTACK_GROWTH */
 		{
-		StackType_t *pxStack;
+			StackType_t *pxStack;
 
 			/* Allocate space for the stack used by the task being created. */
 			pxStack = pvPortMalloc( ( ( ( size_t ) usStackDepth ) * sizeof( StackType_t ) ) ); /*lint !e9079 All values returned by pvPortMalloc() have at least the alignment required by the MCU's stack and this allocation is the stack. */
@@ -804,7 +804,7 @@ static void prvAddNewTaskToReadyList( TCB_t *pxNewTCB ) PRIVILEGED_FUNCTION;
 			}
 			#endif /* tskSTATIC_AND_DYNAMIC_ALLOCATION_POSSIBLE */
 
-			prvInitialiseNewTask( pxTaskCode, pcName, ( uint32_t ) usStackDepth, pvParameters, uxPriority, pxCreatedTask, pxNewTCB, NULL );
+			prvInitialiseNewTask( pxTaskCode, pcName, ( uint32_t ) usStackDepth, pvParameters, uxPriority, pxCreatedTask, pxNewTCB, NULL ); //创建task时被调用，用于初始化task的stack
 			prvAddNewTaskToReadyList( pxNewTCB );
 			xReturn = pdPASS;
 		}
@@ -828,8 +828,8 @@ static void prvInitialiseNewTask( 	TaskFunction_t pxTaskCode,
 									TCB_t *pxNewTCB,
 									const MemoryRegion_t * const xRegions )
 {
-StackType_t *pxTopOfStack;
-UBaseType_t x;
+	StackType_t *pxTopOfStack;
+	UBaseType_t x;
 
 	#if( portUSING_MPU_WRAPPERS == 1 )
 		/* Should the task be created in privileged mode? */
@@ -2014,7 +2014,7 @@ BaseType_t xReturn;
 	{
 		if( xReturn == pdPASS )
 		{
-			xReturn = xTimerCreateTimerTask();
+			//xReturn = xTimerCreateTimerTask();
 		}
 		else
 		{
@@ -3560,7 +3560,7 @@ UBaseType_t uxPriority;
 
 	for( uxPriority = ( UBaseType_t ) 0U; uxPriority < ( UBaseType_t ) configMAX_PRIORITIES; uxPriority++ )
 	{
-		vListInitialise( &( pxReadyTasksLists[ uxPriority ] ) );
+		vListInitialise( &( pxReadyTasksLists[ uxPriority ] ) );  //pxReadyTasksLists根据任务的优先级排序
 	}
 
 	vListInitialise( &xDelayedTaskList1 );
