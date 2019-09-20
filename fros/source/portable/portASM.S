@@ -162,18 +162,30 @@ vPortRestoreTaskContext:
 	LDR		R1, [R0]
 	LDR		SP, [R1]
 
+<<<<<<< HEAD
 	/*  Is there a floating point context to restore?  If the restored
+=======
+	/* Is there a floating point context to restore?  If the restored
+>>>>>>> 5dc63b0d5d606ffd3190c90c150681be878cfbac
 	ulPortTaskHasFPUContext is zero then no. */
 	@ LDR		R0, ulPortTaskHasFPUContextConst
 	@ POP		{R1}
 	@ STR		R1, [R0]
 	@ CMP		R1, #0
 
+<<<<<<< HEAD
 	 /* Restore the floating point context, if any. */
 	 POPNE 	{R0}
 	 VPOPNE	{D16-D31} //??????卡住了
 	 VPOPNE	{D0-D15}
 	 VMSRNE  FPSCR, R0
+=======
+	@ /* Restore the floating point context, if any. */
+	@ POPNE 	{R0}
+	@ VPOPNE	{D16-D31} //??????卡住了
+	@ VPOPNE	{D0-D15}
+	@ VMSRNE  FPSCR, R0
+>>>>>>> 5dc63b0d5d606ffd3190c90c150681be878cfbac
 
 	/* Restore the critical section nesting depth. */
 	LDR		R0, ulCriticalNestingConst

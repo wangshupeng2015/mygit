@@ -95,6 +95,7 @@ context. */
 #define portNO_FLOATING_POINT_CONTEXT	( ( StackType_t ) 0 )
 
 /* Constants required to setup the initial task context. */
+<<<<<<< HEAD
 //#define portINITIAL_SPSR				( ( StackType_t ) 0x1f ) /* System mode, ARM mode, IRQ enabled FIQ enabled. */
 //#define portTHUMB_MODE_BIT				( ( StackType_t ) 0x20 )
 //#define portINTERRUPT_ENABLE_BIT		( 0x80UL )
@@ -102,6 +103,12 @@ context. */
 
 #define portINITIAL_SPSR			( 0x01000000 )
 #define portINITIAL_EXEC_RETURN		( 0xfffffffd )
+=======
+#define portINITIAL_SPSR				( ( StackType_t ) 0x1f ) /* System mode, ARM mode, IRQ enabled FIQ enabled. */
+#define portTHUMB_MODE_BIT				( ( StackType_t ) 0x20 )
+#define portINTERRUPT_ENABLE_BIT		( 0x80UL )
+#define portTHUMB_MODE_ADDRESS			( 0x01UL )
+>>>>>>> 5dc63b0d5d606ffd3190c90c150681be878cfbac
 
 /* Used by portASSERT_IF_INTERRUPT_PRIORITY_INVALID() when ensuring the binary
 point is zero. */
@@ -242,8 +249,21 @@ __attribute__(( used )) const uint32_t ulMaxAPIPriorityMask = ( configMAX_API_CA
 //设置一个新任务的堆栈，这样它就可以被置于调度器的控制之下了。寄存器必须按照端口期望找到它们的顺序放在堆栈上
 StackType_t *pxPortInitialiseStack( StackType_t *pxTopOfStack, TaskFunction_t pxCode, void *pvParameters )
 {
+<<<<<<< HEAD
 
 	# if 0
+=======
+	/* Setup the initial stack of the task.  The stack is set exactly as
+	expected by the portRESTORE_CONTEXT() macro.
+
+	The fist real value on the stack is the status register, which is set for
+	system mode, with interrupts enabled.  A few NULLs are added first to ensure
+	GDB does not try decoding a non-existent return address. */
+	/*设置任务的初始堆栈。堆栈的设置完全符合portRESTORE _ CONTEXT()宏的预期。拳头
+堆栈上的实值是状态寄存器，设置为
+启用中断的系统模式。一些空值是
+首先添加，以确保GDB不会尝试解码不存在的返回地址 */
+>>>>>>> 5dc63b0d5d606ffd3190c90c150681be878cfbac
 	*pxTopOfStack = ( StackType_t ) NULL;
 	pxTopOfStack--;
 	*pxTopOfStack = ( StackType_t ) NULL;
@@ -324,6 +344,7 @@ StackType_t *pxPortInitialiseStack( StackType_t *pxTopOfStack, TaskFunction_t px
 	#endif
 
 	return pxTopOfStack;
+<<<<<<< HEAD
 
 	#endif
 
@@ -352,6 +373,8 @@ StackType_t *pxPortInitialiseStack( StackType_t *pxTopOfStack, TaskFunction_t px
 	pxTopOfStack -= 8;	/* R11, R10, R9, R8, R7, R6, R5 and R4. */
 
 	return pxTopOfStack;
+=======
+>>>>>>> 5dc63b0d5d606ffd3190c90c150681be878cfbac
 }
 /*-----------------------------------------------------------*/
 
@@ -437,7 +460,11 @@ BaseType_t xPortStartScheduler( void )
 			printf("change mode over\r\n");
 			/* Start the timer that generates the tick ISR. */
 			
+<<<<<<< HEAD
 			configSETUP_TICK_INTERRUPT(); //暂时关闭 ？？？？？？？？？
+=======
+			//configSETUP_TICK_INTERRUPT(); //暂时关闭 ？？？？？？？？？
+>>>>>>> 5dc63b0d5d606ffd3190c90c150681be878cfbac
 			printf("config tick_iterrupt over\r\n");
 			/* Start the first task executing. */
 			vPortRestoreTaskContext();

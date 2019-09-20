@@ -11,7 +11,11 @@ _start_:
 	ldr sp,=_stack_end //给栈顶指针sp赋值
 	ldr r1,=_hvc_vector //获得hyp模式下中断向量表的地址
 	mcr p15, 4, r1, c12, c0, 0  //HVBAR，安装hyp模式的中断向量表
+<<<<<<< HEAD
 /*
+=======
+
+>>>>>>> 5dc63b0d5d606ffd3190c90c150681be878cfbac
 	//判断是否需要切换模式
 	mrs  r2,cpsr //获得cpsr的值
 	bic  r2,r2,#0xffffffe0 //将
@@ -21,7 +25,10 @@ _start_:
 	bne switch_to_svc
 
 switch_to_svc:  //完成从hyp到svc模式切换的函数
+<<<<<<< HEAD
 
+=======
+>>>>>>> 5dc63b0d5d606ffd3190c90c150681be878cfbac
 	svc #0
 	
 
@@ -31,7 +38,11 @@ switch_to_svc:  //完成从hyp到svc模式切换的函数
 	//设置svc模式下的中断向量表
 	ldr r1, =_svc_vector
 	mcr	p15, 0, r1, c12, c0, 0
+<<<<<<< HEAD
 */
+=======
+
+>>>>>>> 5dc63b0d5d606ffd3190c90c150681be878cfbac
 	bl main
 
 

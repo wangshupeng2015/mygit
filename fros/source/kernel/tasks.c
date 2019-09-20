@@ -778,7 +778,11 @@ static void prvAddNewTaskToReadyList( TCB_t *pxNewTCB ) PRIVILEGED_FUNCTION;
 				if( pxNewTCB != NULL )
 				{
 					/* Store the stack location in the TCB. */
+<<<<<<< HEAD
 					pxNewTCB->pxStack = pxStack; //初始化任务栈
+=======
+					pxNewTCB->pxStack = pxStack;
+>>>>>>> 5dc63b0d5d606ffd3190c90c150681be878cfbac
 				}
 				else
 				{

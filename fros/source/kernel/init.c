@@ -334,14 +334,22 @@ static void prvQueueReceiveTask( void *pvParameters )
 		#define mainTASK_LED						( 0 )
 		if( ulReceivedValue == ulExpectedValue )
 		{
+<<<<<<< HEAD
 			//vParTestToggleLED( mainTASK_LED );
 			printf("received value is : %d\r\n",ulReceivedValue);
+=======
+			vParTestToggleLED( mainTASK_LED );
+>>>>>>> 5dc63b0d5d606ffd3190c90c150681be878cfbac
 			ulReceivedValue = 0U;
 		}
 	}
 }
 
+<<<<<<< HEAD
 //Menlo, Monaco, 'Courier New', monospace
+=======
+
+>>>>>>> 5dc63b0d5d606ffd3190c90c150681be878cfbac
 int main()
 {
 	/*test the uart*/

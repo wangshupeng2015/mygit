@@ -47,7 +47,11 @@ all: fros.elf secondary-outputs
 fros.elf: $(OBJS) $(USER_OBJS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: GNU ARM Cross C Linker'
+<<<<<<< HEAD
 	arm-none-eabi-gcc -mcpu=cortex-a7 -march=armv7-a -marm -mlittle-endian -mfloat-abi=hard -mfpu=vfpv4 -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections  -g3 -T "/home/wanshupeng/workspace/fros/source/kernel/ld.lds" -Xlinker --gc-sections -Wl,-Map,"fros.map" -o "fros.elf" $(OBJS) $(USER_OBJS) $(LIBS)
+=======
+	arm-none-eabi-gcc -mcpu=cortex-a7 -march=armv7-a -marm -mlittle-endian -mfloat-abi=hard -mfpu=vfpv4 -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections  -g3 -T "/home/wangshupeng/workspace/fros/source/kernel/ld.lds" -Xlinker --gc-sections -Wl,-Map,"fros.map" -o "fros.elf" $(OBJS) $(USER_OBJS) $(LIBS)
+>>>>>>> 5dc63b0d5d606ffd3190c90c150681be878cfbac
 	@echo 'Finished building target: $@'
 	@echo ' '
 
